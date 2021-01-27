@@ -7,6 +7,7 @@ minimal_apt_get_install(){
 	apt-get install -y --no-install-recommends $1
 }
 
+apt-get update
 ## Install Python.
 minimal_apt_get_install python3.8
 minimal_apt_get_install python3-distutils
