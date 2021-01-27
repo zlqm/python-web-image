@@ -8,7 +8,9 @@ RUN apt-get update && \
     apt-key fingerprint ABF5BD827BD9BF62 && \
     apt update && \
     apt-get install nginx -y && \
-    rm -rf /etc/nginx/conf.d/ /etc/nginx/sites-enabled/
+    rm -rf /etc/nginx/conf.d/ /etc/nginx/sites-enabled/ && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 COPY conf/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY conf/nginx/conf.d /etc/nginx/conf.d/
 COPY conf/nginx/sites-enabled/ /etc/nginx/sites-enabled/
@@ -19,4 +21,4 @@ RUN /bd_build/python.sh
 
 # Clean up APT when done.
 RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/.cache/pip
